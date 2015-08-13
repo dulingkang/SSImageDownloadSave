@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -15,11 +15,56 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image1.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="G3V-eb-u2c">
+                                <rect key="frame" x="184" y="0.0" width="200" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="DcC-bZ-JXW"/>
+                                    <constraint firstAttribute="width" constant="200" id="Xft-FI-aQW"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image2.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="f1h-KQ-Wcl">
+                                <rect key="frame" x="184" y="200" width="200" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="2Mj-Vj-bFl"/>
+                                    <constraint firstAttribute="width" constant="200" id="8Qz-sw-ySp"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image3.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="bQy-E4-6xg">
+                                <rect key="frame" x="184" y="400" width="200" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="43v-20-frg"/>
+                                    <constraint firstAttribute="width" constant="200" id="5aL-ri-Xok"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="G3V-eb-u2c" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="3dF-ug-DLd"/>
+                            <constraint firstItem="f1h-KQ-Wcl" firstAttribute="height" secondItem="bQy-E4-6xg" secondAttribute="height" id="6KQ-CN-1mL"/>
+                            <constraint firstItem="f1h-KQ-Wcl" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Fx7-06-K6z"/>
+                            <constraint firstAttribute="bottom" secondItem="bQy-E4-6xg" secondAttribute="bottom" id="Ijl-hs-uhH"/>
+                            <constraint firstItem="f1h-KQ-Wcl" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="184" id="Myn-wR-Wer"/>
+                            <constraint firstItem="f1h-KQ-Wcl" firstAttribute="centerX" secondItem="bQy-E4-6xg" secondAttribute="centerX" id="U0M-ol-zPi"/>
+                            <constraint firstItem="f1h-KQ-Wcl" firstAttribute="width" secondItem="bQy-E4-6xg" secondAttribute="width" id="V9d-sF-980"/>
+                            <constraint firstItem="f1h-KQ-Wcl" firstAttribute="centerX" secondItem="G3V-eb-u2c" secondAttribute="centerX" id="iry-HX-nBP"/>
+                            <constraint firstItem="f1h-KQ-Wcl" firstAttribute="width" secondItem="G3V-eb-u2c" secondAttribute="width" id="m1C-28-1hn"/>
+                            <constraint firstItem="f1h-KQ-Wcl" firstAttribute="height" secondItem="G3V-eb-u2c" secondAttribute="height" id="vmj-lU-ev8"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="imageView1" destination="G3V-eb-u2c" id="gCy-iZ-4Da"/>
+                        <outlet property="imageView2" destination="f1h-KQ-Wcl" id="RsZ-I8-EFs"/>
+                        <outlet property="imageView3" destination="bQy-E4-6xg" id="aOQ-wv-781"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
     </scenes>
+    <resources>
+        <image name="image1.jpg" width="600" height="597"/>
+        <image name="image2.jpg" width="633" height="633"/>
+        <image name="image3.jpg" width="610" height="610"/>
+    </resources>
 </document>
