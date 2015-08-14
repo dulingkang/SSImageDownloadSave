@@ -7,6 +7,9 @@
 //
 
 #import "AppDelegate.h"
+#import "SSImageDownloadSave.h"
+
+#define ImageDownloadUrl @"http://www.zhkhy.com/xiaoka/mainscrollview/mainscrollviewinfo.json"
 
 @interface AppDelegate ()
 
@@ -17,6 +20,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    SSImageDownloadSave *imageDownload = [[SSImageDownloadSave alloc] init];
+    [imageDownload createImageDownloadTask:ImageDownloadUrl];
     return YES;
 }
 

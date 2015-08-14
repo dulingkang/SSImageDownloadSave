@@ -22,21 +22,21 @@
 @end
 
 @implementation ViewController
-{
-    NSString *_plistPath;
-}
 
 #pragma mark - life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     _imageArray = [[NSMutableArray alloc] initWithCapacity:ImageCount];
     NSArray *scrollLocalArray = @[@"image1.jpg",@"image2.jpg",@"image3.jpg"];
-    NSMutableDictionary *plistDict = [[NSMutableDictionary alloc]initWithContentsOfFile:_plistPath];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(imageDownloadNotify:) name:imageDownLoadCompleteNotification object:nil];
+    NSString *path = NSTemporaryDirectory();
+    NSString *plistPath = [path stringByAppendingPathComponent:PlistName];
+    NSMutableDictionary *plistDict = [[NSMutableDictionary alloc]initWithContentsOfFile:plistPath];
     for (NSInteger m = 0 ; m < ImageCount; m++) {
-        NSString *keyStr = [NSString stringWithFormat:@"image%ld.jpg",m];
+        NSString *keyStr = [NSString stringWithFormat:@"image%ld",m+1];
         NSString *imageStr = [plistDict objectForKey:keyStr];
         UIImage *image = [[UIImage alloc] init];
-        if (imageStr) {
+        if (imageStr.length > 0) {
            image = [self loadImageFromDownloadTempFolder:m];
         }
         else {
@@ -47,13 +47,6 @@
     [self reloadTheImages];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    SSImageDownloadSave *imageDownload = [[SSImageDownloadSave alloc] init];
-    [imageDownload createImageDownloadTask:ImageDownloadUrl];
-    _plistPath = imageDownload.plistPath;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(imageDownloadNotify:) name:imageDownLoadCompleteNotification object:nil];
-}
 
 - (void)viewWillDisappear:(BOOL)animated
 {

@@ -9,7 +9,6 @@
 #import "SSImageDownloadSave.h"
 #import "ImageDownloadGlobal.h"
 
-#define PlistName @"downloadImage.plist"
 #define NullString @""
 #define Image1Key @"image1"
 #define Image2Key @"image2"
@@ -19,6 +18,9 @@
 #define ImageUrlKey @"Url"
 
 @implementation SSImageDownloadSave
+{
+    NSString *_plistPath;
+}
 
 - (void)createImageDownloadTask:(NSString *)imageUrl
 {

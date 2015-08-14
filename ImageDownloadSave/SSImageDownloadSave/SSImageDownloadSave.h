@@ -10,7 +10,6 @@
 
 @interface SSImageDownloadSave : NSObject
 
-@property (strong, nonatomic)  NSString *plistPath;
 
 /**
  *  下载图片到指定目录 document/ImageTempFolder，下载时根据plist文件里面的存的md5值判断是否已经下过了，如果本地存在，就不再下载。

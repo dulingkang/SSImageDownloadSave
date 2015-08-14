@@ -13,6 +13,7 @@
 //imageDownload
 #define imageDownLoadCompleteNotification @"imageDownNotificaton"
 #define ImageTempFolder @"imageDownloadFolder"
+#define PlistName @"downloadImage.plist"
 
 #define WIDTH  [UIScreen mainScreen].bounds.size.width
 #define HEIGHT [UIScreen mainScreen].bounds.size.height
