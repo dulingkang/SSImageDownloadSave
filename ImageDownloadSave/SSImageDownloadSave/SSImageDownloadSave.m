@@ -74,8 +74,8 @@
 
 /* 获取Documents文件夹的路径 */
 - (NSString *)getSavedPath:(NSInteger)index{
-    NSString * documentsDirectoryPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *folderPath = [documentsDirectoryPath stringByAppendingPathComponent:ImageTempFolder];
+    NSString *tmpPath = NSTemporaryDirectory();
+    NSString *folderPath = [tmpPath stringByAppendingPathComponent:ImageTempFolder];
     BOOL bo = [[NSFileManager defaultManager] createDirectoryAtPath:folderPath withIntermediateDirectories:YES attributes:nil error:nil];
     NSAssert(bo,@"创建目录失败");
     NSString *str = [NSString stringWithFormat:@"image%ld.jpg",index];

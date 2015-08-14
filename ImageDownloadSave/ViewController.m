@@ -71,8 +71,8 @@
 }
 
 - (UIImage *)loadImageFromDownloadTempFolder:(NSInteger)index {
-    NSString * documentsDirectoryPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *folderPath = [documentsDirectoryPath stringByAppendingPathComponent:ImageTempFolder];
+    NSString * tmpPath = NSTemporaryDirectory();
+    NSString *folderPath = [tmpPath stringByAppendingPathComponent:ImageTempFolder];
     NSString *str = [NSString stringWithFormat:@"image%ld.jpg",index];
     NSString *imagePath = [folderPath stringByAppendingPathComponent:str];
     UIImage * img = [UIImage imageWithContentsOfFile:imagePath];
