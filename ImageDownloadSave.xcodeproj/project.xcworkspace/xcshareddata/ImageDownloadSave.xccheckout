@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>36B7EF0B-B262-46D3-872D-E8CE25F09979</string>
+	<key>IDESourceControlProjectName</key>
+	<string>ImageDownloadSave</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>33CEF62904D15FA7345386B33923D3D171CA9C24</key>
+		<string>https://github.com/dulingkang/SSImageDownloadSave.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>ImageDownloadSave.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>33CEF62904D15FA7345386B33923D3D171CA9C24</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/dulingkang/SSImageDownloadSave.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>33CEF62904D15FA7345386B33923D3D171CA9C24</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>33CEF62904D15FA7345386B33923D3D171CA9C24</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ImageDownloadSave</string>
+		</dict>
+	</array>
+</dict>
+</plist>

@@ -20,6 +20,7 @@
 @implementation SSImageDownloadSave
 {
     NSString *_plistPath;
+    NSString *_md5KeyString;
 }
 
 - (void)createImageDownloadTask:(NSString *)imageUrl
@@ -34,20 +35,16 @@
             NSMutableDictionary *plistDict = [[NSMutableDictionary alloc]initWithContentsOfFile:_plistPath];
             NSArray *array = [dict objectForKey:ImagePicKey];
             for (NSInteger i = 0; i < [array count]; i++) {
-                NSString *md5KeyString = [array[i] objectForKey:Md5Key];
-                if (![self isMd5StringInPlistFile:md5KeyString plistMutableDictionary:plistDict]) {
-                    [self downloadImageWithUrlString:[array[i] objectForKey:ImageUrlKey] imageIndex:i];
-                    NSString *oneImageKeyString = [NSString stringWithFormat:@"image%ld", i+1];
-                    [plistDict setValue:md5KeyString forKey:oneImageKeyString];
-                    [plistDict writeToFile:_plistPath atomically:YES];
-                    NSLog(@"plistImage%ld:%@",i+1,md5KeyString);
+                _md5KeyString = [array[i] objectForKey:Md5Key];
+                if (![self isMd5StringInPlistFile:_md5KeyString plistMutableDictionary:plistDict]) {
+                    [self downloadImageWithUrlString:[array[i] objectForKey:ImageUrlKey] imageIndex:i plistDict:plistDict];
                 }
             }
         }
     }];
 }
 
-- (void)downloadImageWithUrlString:(NSString *)string imageIndex:(NSInteger)index
+- (void)downloadImageWithUrlString:(NSString *)string imageIndex:(NSInteger)index plistDict:(NSMutableArray *)plistDict
 {
     NSURL *url = [NSURL URLWithString:string];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
@@ -66,7 +63,10 @@
                 [fileManager removeItemAtPath:imagePath error:nil];
             }
             [data writeToFile:imagePath atomically:YES];
-            NSString *indexString = [NSString stringWithFormat:@"%ld",index];
+            NSString *indexString = [NSString stringWithFormat:@"%d",index];
+            NSString *oneImageKeyString = [NSString stringWithFormat:@"image%d", index+1];
+            [plistDict setValue:_md5KeyString forKey:oneImageKeyString];
+            [plistDict writeToFile:_plistPath atomically:YES];
             [[NSNotificationCenter defaultCenter] postNotificationName:imageDownLoadCompleteNotification object:indexString];
         }
     }];
