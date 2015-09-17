@@ -10,14 +10,12 @@
 #import "ImageDownloadGlobal.h"
 #import "SSImageDownloadSave.h"
 
-#define ImageDownloadUrl @"http://www.zhkhy.com/xiaoka/mainscrollview/mainscrollviewinfo.json"
+#define ImageDownloadUrl @"http://115.28.228.41/static/background.json"
 #define ImageCount 3
 @interface ViewController ()
 
+@property (weak, nonatomic) IBOutlet UIStackView *stackView;
 @property (nonatomic, strong) NSMutableArray *imageArray;
-@property (weak, nonatomic) IBOutlet UIImageView *imageView1;
-@property (weak, nonatomic) IBOutlet UIImageView *imageView2;
-@property (weak, nonatomic) IBOutlet UIImageView *imageView3;
 
 @end
 
@@ -44,7 +42,14 @@
         }
         [_imageArray addObject:image];
     }
-    [self reloadTheImages];
+    for (UIImage *image in _imageArray) {
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+        imageView.contentMode = UIViewContentModeScaleAspectFit;
+        [_stackView addArrangedSubview:imageView];
+        [UIView animateWithDuration:1 animations:^{
+            [_stackView layoutIfNeeded];
+        }];
+    }
 }
 
 
@@ -67,7 +72,6 @@
     else {
         [_imageArray addObject:image];
     }
-    [self reloadTheImages];
 }
 
 - (UIImage *)loadImageFromDownloadTempFolder:(NSInteger)index {
@@ -77,13 +81,6 @@
     NSString *imagePath = [folderPath stringByAppendingPathComponent:str];
     UIImage * img = [UIImage imageWithContentsOfFile:imagePath];
     return img;
-}
-
-- (void)reloadTheImages
-{
-    _imageView1.image = _imageArray[0];
-    _imageView2.image = _imageArray[1];
-    _imageView3.image = _imageArray[2];
 }
 
 @end

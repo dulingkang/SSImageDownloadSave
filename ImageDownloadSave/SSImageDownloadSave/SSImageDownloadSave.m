@@ -20,56 +20,65 @@
 @implementation SSImageDownloadSave
 {
     NSString *_plistPath;
-    NSString *_md5KeyString;
 }
 
 - (void)createImageDownloadTask:(NSString *)imageUrl
 {
     [self createImagePlist];
     NSURL *url = [NSURL URLWithString:imageUrl];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-        if (data) {
-            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
-            NSLog(@"dict:%@",dict);
-            NSMutableDictionary *plistDict = [[NSMutableDictionary alloc]initWithContentsOfFile:_plistPath];
-            NSArray *array = [dict objectForKey:ImagePicKey];
-            for (NSInteger i = 0; i < [array count]; i++) {
-                _md5KeyString = [array[i] objectForKey:Md5Key];
-                if (![self isMd5StringInPlistFile:_md5KeyString plistMutableDictionary:plistDict]) {
-                    [self downloadImageWithUrlString:[array[i] objectForKey:ImageUrlKey] imageIndex:i plistDict:plistDict];
+//    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionDataTask *task = [session dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if (error != nil) {
+            NSLog(@"plistDownloadError:%@", error);
+        } else {
+            if (data != nil) {
+                NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+                NSLog(@"dict:%@",dict);
+                NSMutableDictionary *plistDict = [[NSMutableDictionary alloc]initWithContentsOfFile:_plistPath];
+                NSArray *array = [dict objectForKey:ImagePicKey];
+                for (NSInteger i = 0; i < [array count]; i++) {
+                    NSString *md5KeyString = [array[i] objectForKey:Md5Key];
+                    if (![self isMd5StringInPlistFile:md5KeyString plistMutableDictionary:plistDict]) {
+                        [self downloadImageWithUrlString:[array[i] objectForKey:ImageUrlKey] imageIndex:i plistDict:plistDict md5String:md5KeyString];
+                    }
                 }
             }
         }
     }];
+    [task resume];
 }
 
-- (void)downloadImageWithUrlString:(NSString *)string imageIndex:(NSInteger)index plistDict:(NSMutableArray *)plistDict
+- (void)downloadImageWithUrlString:(NSString *)string imageIndex:(NSInteger)index plistDict:(NSMutableDictionary *)plistDict md5String:(NSString *)md5String
 {
     NSURL *url = [NSURL URLWithString:string];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-        if (connectionError) {
-            NSLog(@"imageDownLoadError:%@",connectionError);
-        }
-        else {
-            // 设置文件的存放目标路径
-            NSString *imagePath = [self getSavedPath:index];
-            NSLog(@"imagePath:%@", imagePath);
-            
-            // 如果该路径下文件已经存在，就要先将其移除，在移动文件
-            NSFileManager *fileManager = [NSFileManager defaultManager];
-            if ([fileManager fileExistsAtPath:imagePath]) {
-                [fileManager removeItemAtPath:imagePath error:nil];
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionDataTask *task = [session dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if (error != nil) {
+            NSLog(@"imageDownloadError:%@", error);
+        } else {
+            if (data != nil)
+            {
+                // 设置文件的存放目标路径
+                NSString *imagePath = [self getSavedPath:index];
+                NSLog(@"imagePath:%@", imagePath);
+                
+                // 如果该路径下文件已经存在，就要先将其移除，在移动文件
+                NSFileManager *fileManager = [NSFileManager defaultManager];
+                if ([fileManager fileExistsAtPath:imagePath]) {
+                    [fileManager removeItemAtPath:imagePath error:nil];
+                }
+                [data writeToFile:imagePath atomically:YES];
+                NSString *indexString = [NSString stringWithFormat:@"%d",index];
+                NSString *oneImageKeyString = [NSString stringWithFormat:@"image%d", index+1];
+                [plistDict setValue:md5String forKey:oneImageKeyString];
+                [plistDict writeToFile:_plistPath atomically:YES];
+                NSLog(@"plistImage%d:%@",index+1,md5String);
+                [[NSNotificationCenter defaultCenter] postNotificationName:imageDownLoadCompleteNotification object:indexString];
             }
-            [data writeToFile:imagePath atomically:YES];
-            NSString *indexString = [NSString stringWithFormat:@"%d",index];
-            NSString *oneImageKeyString = [NSString stringWithFormat:@"image%d", index+1];
-            [plistDict setValue:_md5KeyString forKey:oneImageKeyString];
-            [plistDict writeToFile:_plistPath atomically:YES];
-            [[NSNotificationCenter defaultCenter] postNotificationName:imageDownLoadCompleteNotification object:indexString];
         }
     }];
+    [task resume];
 }
 
 /* 获取Documents文件夹的路径 */

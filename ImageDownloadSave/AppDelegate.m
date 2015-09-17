@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 #import "SSImageDownloadSave.h"
 
-#define ImageDownloadUrl @"http://www.zhkhy.com/xiaoka/mainscrollview/mainscrollviewinfo.json"
+#define ImageDownloadUrl @"http://115.28.228.41/static/background.json"
 
 @interface AppDelegate ()
 
