@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "33CEF62904D15FA7345386B33923D3D171CA9C24",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "33CEF62904D15FA7345386B33923D3D171CA9C24" : 0,
+    "EBCE5C9FA1F4681FCF67B24B425A2052E8CCD811" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "36B7EF0B-B262-46D3-872D-E8CE25F09979",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "33CEF62904D15FA7345386B33923D3D171CA9C24" : "ImageDownloadSave",
+    "EBCE5C9FA1F4681FCF67B24B425A2052E8CCD811" : ""
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "ImageDownloadSave",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "ImageDownloadSave.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/dulingkang\/SSImageDownloadSave.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "33CEF62904D15FA7345386B33923D3D171CA9C24"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/dulingkang\/shawndu.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "EBCE5C9FA1F4681FCF67B24B425A2052E8CCD811"
+    }
+  ]
+}

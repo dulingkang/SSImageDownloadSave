@@ -26,8 +26,8 @@
 {
     [self createImagePlist];
     NSURL *url = [NSURL URLWithString:imageUrl];
-//    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionConfiguration *config = [NSURLSessionConfiguration ephemeralSessionConfiguration];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:config];
     NSURLSessionDataTask *task = [session dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (error != nil) {
             NSLog(@"plistDownloadError:%@", error);
@@ -52,7 +52,8 @@
 - (void)downloadImageWithUrlString:(NSString *)string imageIndex:(NSInteger)index plistDict:(NSMutableDictionary *)plistDict md5String:(NSString *)md5String
 {
     NSURL *url = [NSURL URLWithString:string];
-    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionConfiguration *config = [NSURLSessionConfiguration ephemeralSessionConfiguration];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:config];
     NSURLSessionDataTask *task = [session dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (error != nil) {
             NSLog(@"imageDownloadError:%@", error);
